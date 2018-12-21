@@ -1,6 +1,7 @@
 {% extends "index.html" %}
 {% set active_page = "profile" %}
 {% from "includes/_formhelpers.html" import print_flashes %}
+{% from "includes/_formhelpers.html" import render_field %}
 
 {% block title %} Profile {% endblock %}
 
@@ -55,93 +56,58 @@
     <!--параметры-->
     <div class="col">
         {{ print_flashes() }}
-        <form>
-            <!--логин-->
-            <div class="form-group">
-                <label for="login">Login</label>
-                <input type="email" class="form-control" id="login" aria-describedby="emailHelp" placeholder="Enter login">
-                <small id="loginHelp" class="form-text text-muted">You can change it in future.</small>
-            </div>
+        <form action="" id="profile_form" method="POST">
+                {{ form.hidden_tag() }}
 
-            <!--стим логин-->
-            <div class="form-group">
-                <label for="steam_acc">Steam login</label>
-                <input type="email" class="form-control" id="steam_acc" placeholder="Steam login">
-            </div>
+                {{ render_field(form.login, class="form-control") }}
 
-            <!--ммр-->
-            <div class="form-group">
-                <label for="mmr">Choose your MMR:</label>
-                <select class="form-control" id="mmr">
-                    <option>< 1k</option>
-                    <option>1k-2k</option>
-                    <option>2k-3k</option>
-                    <option>3k-4k</option>
-                    <option>4k-5k</option>
-                    <option>5k-6k</option>
-                    <option>6k-7k</option>
-                    <option>7k-8k</option>
-                    <option>8k-9k</option>
-                    <option>>9k</option>
-                </select>
-            </div>
+                {{ render_field(form.steam_login, class="form-control") }}
+    
+                <div class="form-group">
+                    {{ form.mmr.label }}
+                    {{ form.mmr(class="form-control") }}
+                </div>
+    
+                <div class="form-group">
+                    {{ form.position.label }}
+                    {{ form.position(class="form-control") }}
+                </div>
+    
+                <div class="form-group">
+                    {{ form.server.label }}
+                    {{ form.server(class="form-control") }}
+                </div>
+    
+                <div class="form-group">
+                    {{ form.aim.label }}
+                    {{ form.aim(class="form-control") }}
+                </div>
+                {{ form.submit(class="btn btn-dark rounded-0") }}
 
-            <!--позиции-->
-            <div>
-                <label>Choose your favourite positions:</label><br>
-                <div class="form-check-inline">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" value="">Carry
-                    </label>
+                <button type="button" class="btn btn-danger rounded-0" data-toggle="modal" data-target="#exampleModal">
+                        Delete profile
+                </button>
+
+                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Delete confirmation</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">Are you sure you want to permanently delete <mark class="bg-dark text-white">yourself</mark>?</div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-succes rounded-0" data-dismiss="modal">Close</button>
+                              <a href="{{ url_for('delete_profile') }}" class="btn btn-danger rounded-0">Delete</a>
+                            </div>
+                          </div>
+                        </div>
                 </div>
 
-                <div class="form-check-inline">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" value="">Offlane
-                    </label>
-                </div>
 
-                <div class="form-check-inline">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" value="">Midlane
-                    </label>
-                </div>
 
-                <div class="form-check-inline">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" value="">Semi support
-                    </label>
-                </div>
-
-                <div class="form-check-inline">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" value="">Full support
-                    </label>
-                </div>
-            </div><br>
-
-            <!--сервер-->
-            <div class="form-group">
-                <label for="server">You play on the following servers:</label>
-                <input type="email" class="form-control" id="login" aria-describedby="emailHelp" placeholder="Europe, Russia, etc">
-            </div>
-
-            <!--для чего-->
-            <div class="form-group">
-                <label for="aim">You would like to:</label>
-                <select class="form-control" id="aim">
-                    <option>join team</option>
-                    <option>find person for the team</option>
-                    <option>find person for a party</option>
-                </select>
-            </div>
-
-            <!--кнопка-->
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="update_info">
-                <label class="form-check-label" for="update_info">Check me out</label>
-            </div>
-            <button type="update" class="btn btn-dark rounded-0">Update</button>
         </form>
     </div>
 </div>

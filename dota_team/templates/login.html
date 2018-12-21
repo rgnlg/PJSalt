@@ -1,0 +1,38 @@
+{% extends "index.html" %}
+{% from "includes/_formhelpers.html" import render_field %}
+{% from "includes/_formhelpers.html" import print_flashes %}
+
+{% set active_page = "login" %}
+
+
+{% block title %} Login {% endblock %}
+
+
+{% block content %}
+
+<div class="row  justify-content-center">
+    <div class="col-4" style="margin-top: 100px;">
+        <div class="container">
+            <img src="https://chpic.su/_data/stickers/vk_dota2/vk_dota2_031.png" alt="hello dude!" style="width:380px;height:380px;margin-left: -45px;">
+        </div>
+
+        <!--параметры-->
+        <div>
+            <form action="", method="POST">
+                <!--логин-->
+                {{ form.hidden_tag() }}
+
+
+                {{ render_field(form.login, placeholder="Enter login", class="form-control") }}
+                {{ render_field(form.password, placeholder="Enter your password", class="form-control") }}
+                
+                <br>
+                {{ print_flashes() }}
+                {{ form.submit(class="btn btn-dark rounded-0")}}
+                <a href="{{ url_for('register') }}" class="btn btn-dark rounded-0">Register</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

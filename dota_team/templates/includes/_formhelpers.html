@@ -1,0 +1,27 @@
+<!-- macro for render form field and show error if any -->
+{% macro render_field(field) %}
+  <div>
+    {{ field.label }}  
+    
+    {{ field(**kwargs)|safe }}
+  </div>
+
+  {% if field.errors %}
+    <!-- print validation rules and errors -->
+    {% for error in field.errors %}
+      <small id="error" class="form-text text-muted">{{ error }}</small>
+    {% endfor %}
+
+  {% endif %}
+{% endmacro %}
+
+<!-- print flashes from routes -->
+{% macro print_flashes() %}
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+{% endmacro %}

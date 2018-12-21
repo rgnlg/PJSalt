@@ -1,0 +1,86 @@
+{% extends "index.html" %}
+{% from "includes/_formhelpers.html" import render_field %}
+{% from "includes/_formhelpers.html" import print_flashes %}
+
+
+{% block title %} Login {% endblock %}
+
+
+{% block content %}
+
+<div class="row" style="margin-top: 80px;">
+    <!--ав+био-->
+    <div class="col-2">
+
+        <!--аватар-->
+        <div class="container">
+            <div class="avatar-upload">
+                <div class="avatar-edit">
+                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                    <label for="imageUpload"></label>
+                </div>
+                <div class="avatar-preview">
+                    <div id="imagePreview" style="background-image: url(https://i-h1.pinimg.com/564x/57/f0/0c/57f00c73f1b91cb2d3f946f6497bb5d6.jpg);">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                        $('#imagePreview').hide();
+                        $('#imagePreview').fadeIn(650);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $("#imageUpload").change(function () {
+                readURL(this);
+            });
+            //# sourceURL=pen.js
+
+        </script>
+        <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+    </div>
+
+    <!--параметры-->
+    <div class="col", style="padding-top: 3%;">
+        <form action="" id="register_form" method="POST">
+            {{ form.hidden_tag() }}
+
+            {{ render_field(form.login, class="form-control") }}
+            {{ render_field(form.steam_login, class="form-control") }}
+
+            {{ render_field(form.password, class="form-control") }}
+            {{ render_field(form.second_password, class="form-control") }}
+
+            <div class="form-group">
+                {{ form.mmr.label }}
+                {{ form.mmr(class="form-control") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.position.label }}
+                {{ form.position(class="form-control") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.server.label }}
+                {{ form.server(class="form-control") }}
+            </div>
+
+            <div class="form-group">
+                {{ form.aim.label }}
+                {{ form.aim(class="form-control") }}
+            </div>
+            {{print_flashes()}}
+            {{ form.submit(class="btn btn-dark rounded-0") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

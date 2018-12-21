@@ -1,0 +1,147 @@
+{% extends "index.html" %}
+{% set active_page = "profile" %}
+
+
+{% block title %} Profile {% endblock %}
+
+{% block content %}
+
+<div class="row" style="margin-top: 80px;">
+    <!--ав+био-->
+    <div class="col-2">
+
+        <!--аватар-->
+        <div class="container">
+            <div class="avatar-upload">
+                <div class="avatar-edit">
+                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                    <label for="imageUpload"></label>
+                </div>
+                <div class="avatar-preview">
+                    <div id="imagePreview" style="background-image: url(https://i-h1.pinimg.com/564x/57/f0/0c/57f00c73f1b91cb2d3f946f6497bb5d6.jpg);">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                        $('#imagePreview').hide();
+                        $('#imagePreview').fadeIn(650);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $("#imageUpload").change(function () {
+                readURL(this);
+            });
+            //# sourceURL=pen.js
+
+        </script>
+        <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
+        <!--био-->
+        <div class="form-group">
+          <label for="bio">About you:</label>
+          <textarea class="form-control" rows="5" maxlength="150" id="bio"></textarea>
+        </div>
+
+    </div>
+
+    <!--параметры-->
+    <div class="col">
+        <form>
+            <!--логин-->
+            <div class="form-group">
+                <label for="login">Login</label>
+                <input type="email" class="form-control" id="login" aria-describedby="emailHelp" placeholder="Enter login">
+                <small id="loginHelp" class="form-text text-muted">You can change it in future.</small>
+            </div>
+
+            <!--стим логин-->
+            <div class="form-group">
+                <label for="steam_acc">Steam login</label>
+                <input type="email" class="form-control" id="steam_acc" placeholder="Steam login">
+            </div>
+
+            <!--ммр-->
+            <div class="form-group">
+                <label for="mmr">Choose your MMR:</label>
+                <select class="form-control" id="mmr">
+                    <option>< 1k</option>
+                    <option>1k-2k</option>
+                    <option>2k-3k</option>
+                    <option>3k-4k</option>
+                    <option>4k-5k</option>
+                    <option>5k-6k</option>
+                    <option>6k-7k</option>
+                    <option>7k-8k</option>
+                    <option>8k-9k</option>
+                    <option>>9k</option>
+                </select>
+            </div>
+
+            <!--позиции-->
+            <div>
+                <label>Choose your favourite positions:</label><br>
+                <div class="form-check-inline">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="">Carry
+                    </label>
+                </div>
+
+                <div class="form-check-inline">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="">Offlane
+                    </label>
+                </div>
+
+                <div class="form-check-inline">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="">Midlane
+                    </label>
+                </div>
+
+                <div class="form-check-inline">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="">Semi support
+                    </label>
+                </div>
+
+                <div class="form-check-inline">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="">Full support
+                    </label>
+                </div>
+            </div><br>
+
+            <!--сервер-->
+            <div class="form-group">
+                <label for="server">You play on the following servers:</label>
+                <input type="email" class="form-control" id="login" aria-describedby="emailHelp" placeholder="Europe, Russia, etc">
+            </div>
+
+            <!--для чего-->
+            <div class="form-group">
+                <label for="aim">You would like to:</label>
+                <select class="form-control" id="aim">
+                    <option>join team</option>
+                    <option>find person for the team</option>
+                    <option>find person for a party</option>
+                </select>
+            </div>
+
+            <!--кнопка-->
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="update_info">
+                <label class="form-check-label" for="update_info">Check me out</label>
+            </div>
+            <button type="update" class="btn btn-dark rounded-0">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "index.html" %}
+{% set active_page = "search" %}
+
+
+{% block title %} Search {% endblock %}
+
+{% block content %}
+
+    <div class="container text-center" style="margin-top: 80px;">
+        <!-- чуть-чуть попозже здесь будет дропдаун менюшечка, но попозже -->
+    </div><br>
+
+    <div class="row container d-flex justify-content-center">
+        <form class="form-inline" action="" method="POST">
+            {{ form.hidden_tag() }}
+
+            {{ form.search_query(class="form-control", style="width: 500px;") }}
+
+            <div class="input-group-append">
+                {{ form.search(class="btn btn-dark rounded-0")}}
+                <!-- <button type="submit" class="btn btn-dark rounded-0">Search</button> -->
+            </div>
+        </form>
+        <!-- kek -->
+        <br><br><br>
+
+        <div class="row container d-flex justify-content-center">
+            {% if user_data %}
+                {% for user in user_data %}
+                    <div class="card ml-1" style="width: 18rem;">
+                      <img class="card-img-top img-res" src="https://i-h1.pinimg.com/564x/57/f0/0c/57f00c73f1b91cb2d3f946f6497bb5d6.jpg" alt="Card image cap" >
+                      <div class="card-body">
+                        <h5 class="card-title">{{user[2]}}</h5>
+                        <!--<p class="card-text align-self-center bio-res">{{user.about}}.</p>-->
+                      </div>
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">MMR: {{user.mmr}}</li>
+                        <li class="list-group-item">AIM: {{user.aim}}</li>
+                      </ul>
+                      <div class="card-body">
+                          <a href="#" class="card-link">steam profile</a>
+                          <a href="#" class="card-link">send request</a>
+                      </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+    </div>
+
+{% endblock %}

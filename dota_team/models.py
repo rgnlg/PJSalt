@@ -1,11 +1,17 @@
-from dota_team import db
+from dota_team import db, login_manager
+from flask_login import UserMixin
 
 # for errors with pylint use pylint-flask
 # source: https://github.com/PyCQA/pylint/issues/1973
 # of just change linter to flake8 :\
 
+# from documentation
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
-class User(db.Model):
+
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     login = db.Column(db.String(35), unique=True, nullable=False)
     steam_login = db.Column(db.String, nullable=False)

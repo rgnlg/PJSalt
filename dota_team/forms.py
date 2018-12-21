@@ -1,9 +1,10 @@
 from flask_wtf import FlaskForm
 
 from wtforms import StringField, SelectField, PasswordField, SubmitField
-from wtforms.validators import DataRequired, EqualTo, Length
+from wtforms.validators import DataRequired, EqualTo, Length, ValidationError
 
 from dota_team.forms_choices import mmr_choices, position_choices, server_choices, aim_choices
+from dota_team.models import User
 
 
 class RegisterForm(FlaskForm):
@@ -20,6 +21,11 @@ class RegisterForm(FlaskForm):
     server = SelectField("Server", choices=server_choices)
     aim = SelectField("Aim", choices=aim_choices, coerce=int)
     submit = SubmitField('Register Me')
+
+    # raise error if login exists
+    def validate_login(self, login):
+        if User.query.filter_by(login=login.data).first():
+            raise ValidationError("User with this login already exists, pick another one!")
 
 
 class LoginForm(FlaskForm):

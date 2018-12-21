@@ -1,6 +1,6 @@
 {% extends "index.html" %}
 {% set active_page = "profile" %}
-
+{% from "includes/_formhelpers.html" import print_flashes %}
 
 {% block title %} Profile {% endblock %}
 
@@ -54,6 +54,7 @@
 
     <!--параметры-->
     <div class="col">
+        {{ print_flashes() }}
         <form>
             <!--логин-->
             <div class="form-group">

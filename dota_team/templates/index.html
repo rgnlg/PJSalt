@@ -132,13 +132,19 @@
             <li class="nav-item">
               <a class="nav-link text-uppercase {{ "active" if active_page == 'search' else ''  }}" href="/search">Team Search</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link text-uppercase {{ "active" if active_page == 'profile' else ''  }}" href="/profile">Profile</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-uppercase {{ "active" if active_page == 'login' else ''  }}" href="/login">Login</a>
-            </li>
 
+            {% if current_user.is_authenticated %}
+                <li class="nav-item">
+                        <a class="nav-link text-uppercase {{ "active" if active_page == 'profile' else ''  }}" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link text-uppercase" href="/logout">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link text-uppercase {{ "active" if active_page == 'login' else ''  }}" href="/login">Login</a>
+                </li>
+            {% endif %}
           </ul>
         </div>
       </div>

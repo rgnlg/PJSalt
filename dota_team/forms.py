@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 
-from wtforms import StringField, SelectField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, SelectField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, EqualTo, Length
 
 from dota_team.forms_choices import mmr_choices, position_choices, server_choices, aim_choices
@@ -12,15 +12,13 @@ class RegisterForm(FlaskForm):
     steam_login = StringField("Steam Login", validators=[DataRequired()])
     password = PasswordField("Password", validators=[
         DataRequired(), Length(min=8, max=35), 
-        EqualTo("second_password", message="Passwords do not match!")
+        EqualTo("second_password", message="Passwords do not match!"),
     ])
     second_password = PasswordField("Confirm Password")
     mmr = SelectField("MMR", choices=mmr_choices, coerce=str)
     position = SelectField("Position", choices=position_choices, coerce=int)
-    
     server = SelectField("Server", choices=server_choices)
     aim = SelectField("Aim", choices=aim_choices, coerce=int)
-    # check = BooleanField("Check me out", validators=[DataRequired()])
     submit = SubmitField('Register Me')
 
 

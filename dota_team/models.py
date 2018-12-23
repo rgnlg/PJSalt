@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
     login = db.Column(db.String(35), unique=True, nullable=False)
     steam_login = db.Column(db.String, nullable=False)
     password_hash = db.Column(db.String, nullable=False)
-    profile_logo = db.Column(db.String, nullable=False, default="default_profile_logo.jpg")
+    profile_img = db.Column(db.String, nullable=False, default="default_profile_logo.jpg")
     mmr = db.Column(db.String(5), nullable=False)
     aim = db.Column(db.String, nullable=False)
     position = db.Column(db.String, nullable=False)
@@ -24,11 +24,8 @@ class User(db.Model, UserMixin):
     server = db.Column(db.String(25), nullable=False)
 
     def __repr__(self):
-        return f"User('{self.id}', '{self.login}', '{self.server}')"
+        return f"User('{self.id}', '{self.login}', '{self.server}', '{self.profile_img}')"
 
 
 # class Requests(db.Model):
 #     pass
-
-
-# test_user = User(login="Howuhh", steam_login="Howuhh", password_hash="12345678", mrr=">6k", aim=1, postion=1, server="eu")

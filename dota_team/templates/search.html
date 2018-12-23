@@ -10,7 +10,7 @@
 
 {% block content %}
     <form action="" method="POST">
-        <div class="row justify-content-center ml-3" style="margin-top: 8%;">
+        <div class="row justify-content-center ml-3 jumbotron" style="margin-top: 8%;">
 
             <div class="col form-group">
                 {{ form.mmr(class="form-control") }}
@@ -51,7 +51,7 @@
                 {% for user in user_data %}
                     <div class="card ml-1" style="width: 18rem;">
                     <h5 class="card-header">{{user.login}}</h5>
-                      <img class="card-img-top thumb-post" src='{{ "static/img/%s"|format(user.profile_logo) }}'
+                      <img class="card-img-top thumb-post" src='{{ "static/img/%s"|format(user.profile_img) }}'
                             style="object-fit: none; object-position: center; max-height: 150px;">
 
                       <ul class="list-group list-group-flush">

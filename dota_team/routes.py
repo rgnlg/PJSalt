@@ -40,6 +40,7 @@ def register():
         db.session.commit()
         flash(f"Successfully registered user {user.login}. Now you can login!", "success")
         return redirect(url_for("login"))
+
     return render_template("register.html", form=form)
 
 
@@ -84,6 +85,7 @@ def search():
         print(search_query)
         if search_query:
             users = User.query.filter_by(**search_query).all()
+            print(users)
             if len(users) == 0:
                 flash("Empty :C", "warning")
                 return redirect(url_for("search"))
@@ -97,20 +99,20 @@ def search():
 @app.route('/profile', methods=["GET", "POST"])
 def profile():
     if current_user.is_authenticated:
-        picture_file = "defualt_profile_logo.jpg"
-        profile_img = url_for("static", filename=f"img/{current_user.profile_logo}")
+        # кэш шалит иногда, хм
+        profile_img = url_for("static", filename=f"img/{current_user.profile_img}")
 
         form = UpdateProfileForm(obj=current_user)
+
         if form.validate_on_submit():
-            # хезе как выбрать только те, что изменены
-            # vars() явно не подходит. данных мало так что апдейтим все!
-            if form.profile_img.data:
-                picture_file = save_profile_img(form.profile_img.data)
+            print(form.profile_img.data)
+            print(current_user.profile_img)
+            picture_file = save_profile_img(form.profile_img.data)
 
             user = User.query.filter_by(login=current_user.login).update(dict(
                     login=form.login.data,
                     steam_login=form.steam_login.data,
-                    profile_logo=picture_file,
+                    profile_img=picture_file,
                     mmr=form.mmr.data,
                     aim=form.aim.data,
                     position=form.position.data,

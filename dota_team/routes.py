@@ -1,4 +1,5 @@
 from dota_team import app, db
+from dota_team.utils import save_profile_img
 from passlib.hash import sha256_crypt
 
 from flask import render_template, url_for, redirect
@@ -87,16 +88,20 @@ def search():
 @app.route('/profile', methods=["GET", "POST"])
 def profile():
     if current_user.is_authenticated:
+        picture_file = "defualt_profile_logo.jpg"
         profile_img = url_for("static", filename=f"img/{current_user.profile_logo}")
 
         form = UpdateProfileForm(obj=current_user)
         if form.validate_on_submit():
             # хезе как выбрать только те, что изменены
             # vars() явно не подходит. данных мало так что апдейтим все!
-            print(current_user.steam_login)
+            if form.profile_img.data:
+                picture_file = save_profile_img(form.profile_img.data)
+
             user = User.query.filter_by(login=current_user.login).update(dict(
                     login=form.login.data,
                     steam_login=form.steam_login.data,
+                    profile_logo=picture_file,
                     mmr=form.mmr.data,
                     aim=form.aim.data,
                     position=form.position.data,

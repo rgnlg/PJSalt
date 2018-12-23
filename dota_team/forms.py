@@ -1,5 +1,7 @@
 from flask import flash
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
+
 from flask_login import current_user
 
 from wtforms import StringField, SelectField, PasswordField, SubmitField
@@ -33,7 +35,7 @@ class RegisterForm(FlaskForm):
 class UpdateProfileForm(FlaskForm):
     login = StringField("Login", validators=[Length(min=3, max=35)])
     steam_login = StringField("Steam Login")
-    # profile_img = 
+    profile_img = FileField("Profile logo", validators=[FileAllowed(["jpg", "png"])])
     mmr = SelectField("MMR", choices=mmr_choices, coerce=str)
     position = SelectField("Position", choices=position_choices, coerce=int)
     server = SelectField("Server", choices=server_choices)

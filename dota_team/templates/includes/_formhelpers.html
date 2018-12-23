@@ -2,14 +2,13 @@
 {% macro render_field(field) %}
   <div>
     {{ field.label }}  
-    
+
     {{ field(**kwargs)|safe }}
   </div>
 
   {% if field.errors %}
     <!-- print validation rules and errors -->
     {% for error in field.errors %}
-
       <small id="error" class="form-text text-muted ">
           <mark class="bg-dark text-white">{{ error }}</mark>
       </small>

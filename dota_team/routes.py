@@ -84,6 +84,10 @@ def search():
         print(search_query)
         if search_query:
             users = User.query.filter_by(**search_query).all()
+            if len(users) == 0:
+                flash("Empty :C", "warning")
+                return redirect(url_for("search"))
+
             return render_template("search.html", form=form, user_data=users)
 
     return render_template("search.html", form=form)

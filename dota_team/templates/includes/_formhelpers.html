@@ -9,7 +9,10 @@
   {% if field.errors %}
     <!-- print validation rules and errors -->
     {% for error in field.errors %}
-      <small id="error" class="form-text text-muted">{{ error }}</small>
+
+      <small id="error" class="form-text text-muted ">
+          <mark class="bg-dark text-white">{{ error }}</mark>
+      </small>
     {% endfor %}
 
   {% endif %}

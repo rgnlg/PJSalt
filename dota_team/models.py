@@ -16,6 +16,7 @@ class User(db.Model, UserMixin):
     login = db.Column(db.String(35), unique=True, nullable=False)
     steam_login = db.Column(db.String, nullable=False)
     password_hash = db.Column(db.String, nullable=False)
+    profile_logo = db.Column(db.String, nullable=False, default="default_profile_logo.jpg")
     mmr = db.Column(db.String(5), nullable=False)
     aim = db.Column(db.Integer, nullable=False)
     position = db.Column(db.Integer, nullable=False)

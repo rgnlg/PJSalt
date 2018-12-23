@@ -1,5 +1,6 @@
 from flask import flash
 from flask_wtf import FlaskForm
+from flask_login import current_user
 
 from wtforms import StringField, SelectField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, EqualTo, Length, ValidationError
@@ -32,6 +33,7 @@ class RegisterForm(FlaskForm):
 class UpdateProfileForm(FlaskForm):
     login = StringField("Login", validators=[Length(min=3, max=35)])
     steam_login = StringField("Steam Login")
+    # profile_img = 
     mmr = SelectField("MMR", choices=mmr_choices, coerce=str)
     position = SelectField("Position", choices=position_choices, coerce=int)
     server = SelectField("Server", choices=server_choices)
@@ -39,9 +41,11 @@ class UpdateProfileForm(FlaskForm):
     submit = SubmitField('Update')
 
     # raise error if login exists
-    def validate_login_update(self, login):
-        if User.query.filter_by(login=login.data).first():
-            raise ValidationError("User with this login already exists, pick another one!")
+    def validate_login(self, login):
+        if login.data != current_user.login:
+            user = User.query.filter_by(login=login.data).first()
+            if user:
+                raise ValidationError("User with this login already exists, pick another one!")
 
 
 class LoginForm(FlaskForm):

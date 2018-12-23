@@ -73,8 +73,9 @@ def logout():
 
 @app.route('/search', methods=["GET", "POST"])
 def search():
-    if current_user.is_authenticated:
-        return redirect(url_for("home"))
+    if not current_user.is_authenticated:
+        flash("To search first you need to login!", "warning")
+        return redirect(url_for("login"))
 
     form = TeamSearchForm(request.form)
 
@@ -86,18 +87,13 @@ def search():
 @app.route('/profile', methods=["GET", "POST"])
 def profile():
     if current_user.is_authenticated:
-        # костыль для дефолта в selectfiled
-        form = UpdateProfileForm(
-            login=current_user.login,
-            steam_login=current_user.steam_login,
-            mmr=current_user.mmr,
-            aim=current_user.aim,
-            position=current_user.position,
-            server=current_user.server
-        )
+        profile_img = url_for("static", filename=f"img/{current_user.profile_logo}")
+
+        form = UpdateProfileForm(obj=current_user)
         if form.validate_on_submit():
             # хезе как выбрать только те, что изменены
             # vars() явно не подходит. данных мало так что апдейтим все!
+            print(current_user.steam_login)
             user = User.query.filter_by(login=current_user.login).update(dict(
                     login=form.login.data,
                     steam_login=form.steam_login.data,
@@ -109,7 +105,7 @@ def profile():
             db.session.commit()
             flash("Your profile info successfully updated!", "success")
             return redirect(url_for("profile"))
-        return render_template("profile.html", form=form)
+        return render_template("profile.html", form=form, profile_img=profile_img)
     else:
         flash("Your are not logged in yet!", "danger")
         return redirect(url_for("login"))

@@ -10,7 +10,7 @@
 
 {% block content %}
     <form action="" method="POST">
-        <div class="row justify-content-center ml-3" style="margin-top: 80px;">
+        <div class="row justify-content-center ml-3" style="margin-top: 8%;">
 
             <div class="col form-group">
                 {{ form.mmr(class="form-control") }}
@@ -50,18 +50,48 @@
             {% if user_data %}
                 {% for user in user_data %}
                     <div class="card ml-1" style="width: 18rem;">
-                      <img class="card-img-top img-res" src="https://i-h1.pinimg.com/564x/57/f0/0c/57f00c73f1b91cb2d3f946f6497bb5d6.jpg" alt="Card image cap" >
-                      <div class="card-body">
-                        <h5 class="card-title">{{user.login}}</h5>
-                        <!--<p class="card-text align-self-center bio-res">{{user.about}}.</p>-->
-                      </div>
+                    <h5 class="card-header">{{user.login}}</h5>
+                      <img class="card-img-top thumb-post" src='{{ "static/img/%s"|format(user.profile_logo) }}'
+                            style="object-fit: none; object-position: center; max-height: 150px;">
+
                       <ul class="list-group list-group-flush">
-                        <li class="list-group-item">MMR: {{user.mmr}}</li>
-                        <li class="list-group-item">AIM: {{user.aim}}</li>
+                          <li class="list-group-item">MMR: {{user.mmr}}</li>
+                          <li class="list-group-item">POSITION: {{user.position}}</li>
+                          <li class="list-group-item">AIM: {{user.aim}}</li>
                       </ul>
                       <div class="card-body">
-                          <a href="#" class="card-link">steam profile</a>
-                          <a href="#" class="card-link">send request</a>
+                          <a href="/" class="btn btn-light rounded-0" role="button">steam profile</a>
+
+                          <button type="button" class="btn btn-light rounded-0" data-toggle="modal" data-target="#exampleModal">
+                            send request
+                          </button>
+
+                          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">Sending request</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                          </button>
+                                      </div>
+
+                                      <div class="modal-body">
+                                          Write something to your possible future teammate :)
+                                          <form>
+                                              <div class="form-group">
+                                                  <textarea class="form-control" id="request_text" rows="3"></textarea>
+                                              </div>
+                                          </form>
+                                      </div>
+
+                                      <div class="modal-footer">
+                                          <button type="button" class="btn btn-succes rounded-0" data-dismiss="modal">Close</button>
+                                          <a href="/" class="btn btn-light rounded-0">Send</a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
                       </div>
                     </div>
                 {% endfor %}

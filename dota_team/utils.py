@@ -10,7 +10,7 @@ def save_profile_img(form_img):
     _, file_ext = os.path.splitext(form_img.filename)
     file_name = f"{str(current_user.login)}{file_ext}"
 
-    out_size = (128, 128)
+    out_size = (288, 288)
     i = Image.open(form_img)
     i.thumbnail(out_size)
 

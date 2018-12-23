@@ -5,25 +5,48 @@
 {% block title %} Home {% endblock %}
 
 {% block content %}
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container text-center">
-            <h1>Hello from home!</h1>
-            <p>
-                Dota Match is the platform that helps you find players for your Dota2 sessions
+    <div class="jumbotron jumbotron-fluid" style="margin-top: 15%">
+        <div class="container">
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col display-4"> Hello, world!</div>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col">
+                    <p class="lead">Dota Match is the platform that helps you find players for your Dota2 weekends.</p>
+                </div>
+            </div>
 
-                    You have 3 options:
-                    - find a team, if you are a lonely guy
-                    - find a player, if your Fly left you
-                    - find the pair, if "it's just for once"
-                    
-                    Sign up, provide information about yourself and find your Dream Team
-                    
-                    just get your shit together and go ahead for the victory, yo!
-            </p>
-            <a href="/search" class="btn btn-dark rounded-0" role="button">start searching</a>
         </div>
+
+        <hr class="my-4">
+
+        <div class="container text-center">
+
+            <h4>You have <i>three</i> options:</h4>
+
+            <p>find a <b>team</b>, if you are a lonely guy<br>
+                find a <b>player</b>, if your Fly left you<br>
+                find the <b>pair</b>, if "it's just for once"</p>
+
+        </div>
+
+        <hr class="my-4">
+
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col">
+                <p class="lead">Sign up, provide information about yourself and find your Dream Team
+                just get your shit together and go ahead for the victory, yo!</p>
+                <a href="/search" class="btn btn-dark rounded-0" role="button">start searching</a>
+            </div>
+            <div class="col-1"></div>
+        </div>
+
+
     </div>
-    <div class="container">
+    <!--<div class="container">
         <ul class="nav nav-pills d-flex justify-content-center">
             <li class="nav-item pill">
                 <a class="nav-link active" data-toggle="tab" href="#tab1">find team</a>
@@ -41,5 +64,5 @@
             <div class="tab-pane fade" id="tab2" role="tabpanel">tab 2 content..</div>
             <div class="tab-pane fade" id="tab3" role="tabpanel">tab 3 content...</div>
         </div>
-    </div>
+    </div>-->
 {% endblock %}

@@ -4,16 +4,15 @@ mmr_choices = [
     ("2k-3k", "2k-3k"), 
     ("3k-4k", "3k-4k"), 
     ("4k-5k", "4k-5k"), 
-    ("6k-7k", "6k-7k"), 
     (">6k", ">6k"),
 ]
 
 position_choices = [
-    (1, "Carry"),
-    (2, "Midlane"),
-    (3, "Offlane"),
-    (4, "Semi Support"),
-    (5, "Full Support"),
+    ("Carry", "Carry"),
+    ("Midlane", "Midlane"),
+    ("Offlane", "Offlane"),
+    ("Semi Support", "Semi Support"),
+    ("Full Support", "Full Support"),
 ]
 
 server_choices = [
@@ -23,7 +22,34 @@ server_choices = [
 ]
 
 aim_choices = [
-    (1, "join team"),
-    (2, "find person for the team"),
-    (3, "find person for a party"),
+    ("join team", "join team"),
+    ("find person for the team", "find person for the team"),
+    ("find person for a party", "find person for a party"),
+]
+
+
+# этого никто не увидит
+mmr_choices_search = [
+    ("default", "mmr:"),
+    ("<1k", "< 1k"), 
+    ("2k-3k", "2k-3k"), 
+    ("3k-4k", "3k-4k"), 
+    ("4k-5k", "4k-5k"), 
+    (">6k", ">6k"),
+]
+
+position_choices_search = [
+    ("default", "position:"),  
+    ("Carry", "Carry"),
+    ("Midlane", "Midlane"),
+    ("Offlane", "Offlane"),
+    ("Semi Support", "Semi Support"),
+    ("Full Support", "Full Support"),
+]
+
+aim_choices_search = [
+    ("defualt", "aim:"),  
+    ("join team", "join team"),
+    ("find person for the team", "find person for the team"),
+    ("find person for a party", "find person for a party"),
 ]

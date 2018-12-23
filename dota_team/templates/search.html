@@ -1,26 +1,48 @@
 {% extends "index.html" %}
 {% set active_page = "search" %}
 
+{% from "includes/_formhelpers.html" import print_flashes %}
+{% from "includes/_formhelpers.html" import render_field %}
+
+
 
 {% block title %} Search {% endblock %}
 
 {% block content %}
+    <form action="" method="POST">
+        <div class="row justify-content-center ml-3" style="margin-top: 80px;">
 
-    <div class="container text-center" style="margin-top: 80px;">
-        <!-- чуть-чуть попозже здесь будет дропдаун менюшечка, но попозже -->
-    </div><br>
+            <div class="col form-group">
+                {{ form.mmr(class="form-control") }}
+            </div>
+
+            <div class="col form-group">
+                {{ form.position(class="form-control") }}
+            </div>
+
+            <div class="col form-group">
+                {{ form.aim(class="form-control") }}
+            </div>
+
+            <div class="col-4 input-group" style="margin-top: -1em;">
+                <div class="form-inline">
+                    {{ form.hidden_tag() }}
+
+                    {{ form.login_search(class="form-control", placeholder="type login") }}
+                    <div class="input-group-append">
+                        {{ form.search(class="btn btn-dark rounded-0")}}
+                    </div>
+                </div>
+            </div>
+    </form>
+
+
+
+    </div>
+
+
 
     <div class="row container d-flex justify-content-center">
-        <form class="form-inline" action="" method="POST">
-            {{ form.hidden_tag() }}
-
-            {{ form.search_query(class="form-control", style="width: 500px;") }}
-
-            <div class="input-group-append">
-                {{ form.search(class="btn btn-dark rounded-0")}}
-                <!-- <button type="submit" class="btn btn-dark rounded-0">Search</button> -->
-            </div>
-        </form>
         <!-- kek -->
         <br><br><br>
 
@@ -30,7 +52,7 @@
                     <div class="card ml-1" style="width: 18rem;">
                       <img class="card-img-top img-res" src="https://i-h1.pinimg.com/564x/57/f0/0c/57f00c73f1b91cb2d3f946f6497bb5d6.jpg" alt="Card image cap" >
                       <div class="card-body">
-                        <h5 class="card-title">{{user[2]}}</h5>
+                        <h5 class="card-title">{{user.login}}</h5>
                         <!--<p class="card-text align-self-center bio-res">{{user.about}}.</p>-->
                       </div>
                       <ul class="list-group list-group-flush">

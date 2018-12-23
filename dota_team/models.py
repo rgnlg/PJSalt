@@ -18,8 +18,8 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String, nullable=False)
     profile_logo = db.Column(db.String, nullable=False, default="default_profile_logo.jpg")
     mmr = db.Column(db.String(5), nullable=False)
-    aim = db.Column(db.Integer, nullable=False)
-    position = db.Column(db.Integer, nullable=False)
+    aim = db.Column(db.String, nullable=False)
+    position = db.Column(db.String, nullable=False)
     # in the future - many-to-many relation - separate db
     server = db.Column(db.String(25), nullable=False)
 

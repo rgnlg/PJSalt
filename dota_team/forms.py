@@ -8,6 +8,7 @@ from wtforms import StringField, SelectField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, EqualTo, Length, ValidationError
 
 from dota_team.forms_choices import mmr_choices, position_choices, server_choices, aim_choices
+from dota_team.forms_choices import mmr_choices_search, position_choices_search, aim_choices_search
 from dota_team.models import User
 
 
@@ -21,9 +22,9 @@ class RegisterForm(FlaskForm):
     ])
     second_password = PasswordField("Confirm Password")
     mmr = SelectField("MMR", choices=mmr_choices, coerce=str)
-    position = SelectField("Position", choices=position_choices, coerce=int)
-    server = SelectField("Server", choices=server_choices)
-    aim = SelectField("Aim", choices=aim_choices, coerce=int)
+    position = SelectField("Position", choices=position_choices, coerce=str)
+    server = SelectField("Server", choices=server_choices, coerce=str)
+    aim = SelectField("Aim", choices=aim_choices, coerce=str)
     submit = SubmitField('Register Me')
 
     # raise error if login exists
@@ -37,9 +38,9 @@ class UpdateProfileForm(FlaskForm):
     steam_login = StringField("Steam Login")
     profile_img = FileField("Profile logo", validators=[FileAllowed(["jpg", "png"])])
     mmr = SelectField("MMR", choices=mmr_choices, coerce=str)
-    position = SelectField("Position", choices=position_choices, coerce=int)
-    server = SelectField("Server", choices=server_choices)
-    aim = SelectField("Aim", choices=aim_choices, coerce=int)
+    position = SelectField("Position", choices=position_choices, coerce=str)
+    server = SelectField("Server", choices=server_choices, coerce=str)
+    aim = SelectField("Aim", choices=aim_choices, coerce=str)
     submit = SubmitField('Update')
 
     # raise error if login exists
@@ -63,5 +64,8 @@ class LoginForm(FlaskForm):
 
 # пока что может быть оверкилл, но в будущем должна быть поисковая форма, а не просто запрос
 class TeamSearchForm(FlaskForm):
-    search_query = StringField("What are you looking for?")
+    mmr = SelectField("MMR", choices=mmr_choices_search, coerce=str)
+    position = SelectField("Position", choices=position_choices_search, coerce=str)
+    aim = SelectField("Aim", choices=aim_choices_search, coerce=str)
+    login_search = StringField("What are you looking for?")
     search = SubmitField("Search")

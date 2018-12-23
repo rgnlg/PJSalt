@@ -1,5 +1,5 @@
 from dota_team import app, db
-from dota_team.utils import save_profile_img
+from dota_team.utils import save_profile_img, get_search_params
 from passlib.hash import sha256_crypt
 
 from flask import render_template, url_for, redirect
@@ -79,8 +79,13 @@ def search():
         return redirect(url_for("login"))
 
     form = TeamSearchForm(request.form)
+    if form.validate_on_submit():
+        search_query = get_search_params(form)
+        print(search_query)
+        if search_query:
+            users = User.query.filter_by(**search_query).all()
+            return render_template("search.html", form=form, user_data=users)
 
-    # return render_template("search.html", query=query_position, user_data=users)
     return render_template("search.html", form=form)
 
 
